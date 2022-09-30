@@ -53,4 +53,4 @@ organized tab of my shoe collection, I felt like this
 project was a very interesting idea. Using this app,
 it'll be easier to show other people your collection or
 to navigate if you have a shoe you're willing to sell
-that other people might want to purchase.
+that other people might purchase.
