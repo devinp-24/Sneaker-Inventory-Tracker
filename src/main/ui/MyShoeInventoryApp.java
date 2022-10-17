@@ -5,17 +5,21 @@ import model.ShoeInventory;
 
 import java.util.Scanner;
 
+// ShoeInventory application
 public class MyShoeInventoryApp {
 
     private ShoeInventory myShoeCollection;
     private Scanner input;
 
+    // EFFECTS: runs the ShoeInventory application
     public MyShoeInventoryApp() {
         runMyShoeInventoryApp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runMyShoeInventoryApp() {
-        innit();
+        init();
 
         boolean keepGoing = true;
 
@@ -43,11 +47,14 @@ public class MyShoeInventoryApp {
         }
     }
 
-    private void innit() {
+    // MODIFIES: this
+    // EFFECTS: initializes accounts
+    private void init() {
         myShoeCollection = new ShoeInventory();
         input = new Scanner(System.in);
     }
 
+    // EFFECTS: displays the menu of options to the user
     private void displayMenu() {
         System.out.println("Welcome to your Shoe Collection!");
         System.out.println("What would you like to do? (enter the number key)");
@@ -62,6 +69,7 @@ public class MyShoeInventoryApp {
 
     }
 
+    // EFFECTS: Displays the current statistics of the user's personal collection
     private void getStats() {
         System.out.println("Your current collection of shoes is: ");
         for (Shoe shoe: myShoeCollection.getShoes()) {
@@ -70,101 +78,123 @@ public class MyShoeInventoryApp {
         System.out.println("You currently have " + myShoeCollection.getNumShoes() + " shoes in your collection");
         System.out.println("You have sold " + myShoeCollection.getNumShoesSold() + " shoes");
         System.out.println("The total value of shoes in your collection is " + myShoeCollection.getTotalValue());
-
-        boolean back = false;
-        while (!back) {
-            System.out.println("Enter back to go back to the menu");
-            String userInput = input.next();
-            if (userInput.equals("back")) {
-                back = true;
-            }
-        }
+        backToMenu();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a shoe to the user's personal collection
     private void addShoe() {
         Shoe shoe;
         shoe = createShoe();
 
         myShoeCollection.addShoes(shoe);
+        backToMenu();
     }
 
+    // REQUIRES: the shoe to be removed exists in the collection
+    // MODIFIES: this
+    // EFFECTS: removes a shoe from the user's collection
     private void removeShoe() {
-        System.out.println("Your current collection of shoes is: ");
-        for (Shoe shoe: myShoeCollection.getShoes()) {
-            System.out.println(shoe.getName());
-        }
+        displayCurrentShoes();
         System.out.println("Enter the name of the shoe you want to remove:");
         String name = input.nextLine();
         boolean found = false;
+        Shoe remove = null;
         for (Shoe shoe: myShoeCollection.getShoes()) {
             if (shoe.getName().equals(name)) {
-                myShoeCollection.removeShoes(shoe);
+                remove = shoe;
+                found = true;
+            }
+        }
+        if (found) {
+            myShoeCollection.removeShoes(remove);
+        } else {
+            System.out.println("Shoe not in your collection");
+        }
+        backToMenu();
+    }
+
+    // REQUIRES: the shoe to be removed exists in the collection and shoe should not be tagged as 'to keep'
+    // MODIFIES: this
+    // EFFECTS: removes a shoe from the user's collection
+    private void sellShoe() {
+        displayCurrentShoes();
+        System.out.println("Enter the name of the shoe you want to sell:");
+        String name = input.nextLine();
+        boolean found = false;
+        Shoe remove = null;
+        for (Shoe shoe: myShoeCollection.getShoes()) {
+            if (shoe.getName().equals(name)) {
+                found = true;
+                remove = shoe;
+            }
+        }
+        if (found) {
+            if (myShoeCollection.sellShoes(remove)) {
+                System.out.println("Shoe sold successfully");
+            } else {
+                System.out.println("You cannot sell this shoe since you wish to keep this in your collection");
+            }
+        } else {
+            System.out.println("Shoe not found in your collection");
+        }
+        backToMenu();
+    }
+
+    // EFFECTS: displays the user's wishlist
+    private void viewWishList() {
+        System.out.println("Your wishlist: ");
+        for (Shoe shoe: myShoeCollection.getWishlist()) {
+            System.out.println(shoe.getName());
+        }
+        backToMenu();
+    }
+
+    // REQUIRES: the shoe to be added should not already be part of collection or wishlist
+    // MODIFIES: this
+    // EFFECTS: adds a shoe to the wishlist
+    private void addToWishList() {
+        Shoe shoe;
+        shoe = createShoe();
+
+        boolean found = false;
+
+        for (Shoe s: myShoeCollection.getShoes()) {
+            if (s.getName().equals(shoe.getName())) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Shoe added to wishlist successfully");
+            myShoeCollection.addToWishlist(shoe);
+        } else {
+            System.out.println("You already have this shoe in your collection/wishlist");
+        }
+        backToMenu();
+    }
+
+    // REQUIRES: the shoe should be in the collection
+    // EFFECTS: displays information about the shoe
+    private void getInfoAboutShoe() {
+        displayCurrentShoes();
+        System.out.println("Enter the name of the shoe you want to get information about:");
+        String name = input.nextLine();
+
+        boolean found = false;
+        for (Shoe shoe: myShoeCollection.getShoes()) {
+            if (shoe.getName().equals(name)) {
+                System.out.println(myShoeCollection.getInfo(shoe));
                 found = true;
             }
         }
         if (!found) {
             System.out.println("Shoe not in your collection");
         }
+        backToMenu();
     }
 
-    private void sellShoe() {
-        System.out.println("Your current collection of shoes is: ");
-        for (Shoe shoe: myShoeCollection.getShoes()) {
-            System.out.println(shoe.getName());
-        }
-        System.out.println("Enter the name of the shoe you want to sell:");
-        String name = input.nextLine();
-        boolean success = false;
-        for (Shoe shoe: myShoeCollection.getShoes()) {
-            if (shoe.getName().equals(name)) {
-                success = myShoeCollection.sellShoes(shoe);
-            }
-        }
-
-        if (success) {
-            System.out.println("Shoe sold successfully");
-        } else {
-            System.out.println("The shoe is either part of your personal collection that you do not wish to sell "
-                    + " or not found in your collection");
-        }
-    }
-
-    private void viewWishList() {
-        for (Shoe shoe: myShoeCollection.getWishlist()) {
-            System.out.println(shoe.getName());
-        }
-    }
-
-    private void addToWishList() {
-        Shoe shoe;
-        shoe = createShoe();
-
-        boolean success;
-
-        success = myShoeCollection.addToWishlist(shoe);
-        if (success) {
-            System.out.println("Shoe added to wishlist successfully");
-        } else {
-            System.out.println("You already have this shoe in your collection");
-        }
-
-    }
-
-    private void getInfoAboutShoe() {
-        System.out.println("Your current collection of shoes is: ");
-        for (Shoe shoe: myShoeCollection.getShoes()) {
-            System.out.println(shoe.getName());
-        }
-        System.out.println("Enter the name of the shoe you want to get information about:");
-        String name = input.nextLine();
-
-        for (Shoe shoe: myShoeCollection.getShoes()) {
-            if (shoe.getName().equals(name)) {
-                myShoeCollection.getInfo(shoe);
-            }
-        }
-    }
-
+    // EFFECTS: helper method to create a new shoe
     private Shoe createShoe() {
         input.nextLine();
         System.out.println("Enter the name of the shoe: ");
@@ -188,6 +218,27 @@ public class MyShoeInventoryApp {
         shoe.setPersonalCollection(personalCollection);
 
         return shoe;
+    }
+
+    // EFFECTS: helper method to go back to the menu
+    private void backToMenu() {
+        boolean back = false;
+        while (!back) {
+            System.out.println("Enter back to go back to the menu");
+            String userInput = input.next();
+            if (userInput.equals("back")) {
+                back = true;
+            }
+        }
+    }
+
+    // EFFECTS: helper method to display current shoes in the collection
+    private void displayCurrentShoes() {
+        input.nextLine();
+        System.out.println("Your current collection of shoes is: ");
+        for (Shoe shoe: myShoeCollection.getShoes()) {
+            System.out.println(shoe.getName());
+        }
     }
 
 }

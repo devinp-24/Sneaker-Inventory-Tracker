@@ -42,7 +42,7 @@ public class ShoeInventory {
         this.setTotalValue(totalValue - shoe.getValue());
     }
 
-    // REQUIRES: shoe should not be labelled as part of personal collection to keep
+    // REQUIRES: shoe should not be labelled as part of personal collection to keep and shoe is in inventory
     // MODIFIES: this
     // EFFECTS: removes shoe from the shoe collection list and increments the number of shoes sold by 1
     public boolean sellShoes(Shoe shoe) {
@@ -50,21 +50,19 @@ public class ShoeInventory {
             this.removeShoes(shoe);
             this.setNumShoesSold(numShoesSold + 1);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    // REQUIRES: shoe should not already be part of collection
+    // REQUIRES: shoe should not already be part of collection or wishlist
     // MODIFIES: this
     // EFFECTS: adds the shoe to the wishlist
     public boolean addToWishlist(Shoe shoe) {
         if (!this.getShoes().contains(shoe) && !this.getWishlist().contains(shoe)) {
             this.wishlist.add(shoe);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -74,8 +72,7 @@ public class ShoeInventory {
     public String getInfo(Shoe shoe) {
         if (this.shoes.contains(shoe)) {
             return shoe.getInfo();
-        }
-        else {
+        } else {
             return "Shoes not found!";
         }
     }
