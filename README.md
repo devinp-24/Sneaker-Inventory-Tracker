@@ -26,13 +26,11 @@ I am willing to keep in my personal collection
 currently in my collection
 - As a user, I want to be able to remove shoes from
 my collection
-- As a user, I want to be able to check the number and
-model of shoes I have sold before
-- As a user, I want to be able to add shoes to a
-- wishlist
+- As a user, I want to be able to check the number of shoes I have sold before
+- As a user, I want to be able to add shoes to a wishlist
 - As a user, I want to be able to get some information
-about the shoe I have such as day of purchase or date
-of release of the shoe
+about the shoe such as name of model, type, retail price
+and current value
 
 An example of text with **bold** and *italic* fonts. 
 
