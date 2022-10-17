@@ -51,7 +51,7 @@ class ShoeTest {
 
     // to test the getInfo method
     @Test
-    public void getInfoTest() {
+    public void testGetInfo() {
         String shoe1Check = "Model Name: Jordan 1 Travis Scott\nBrand: Jordan\nTop: High\nRetail Price: 150.0\n" +
                 "Current Value: 1900.0";
         assertEquals(shoe1Check, shoe1.getInfo());
@@ -67,7 +67,7 @@ class ShoeTest {
 
     // to test the getPersonalCollection getter method
     @Test
-    public void personalCollectionTest() {
+    public void testPersonalCollection() {
         assertTrue(shoe1.getPersonalCollection() == true);
         assertEquals(shoe2.getPersonalCollection(), true);
         assertFalse(shoe3.getPersonalCollection() == true);
