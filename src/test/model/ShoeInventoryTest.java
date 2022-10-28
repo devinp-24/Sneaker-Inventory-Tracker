@@ -3,6 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoeInventoryTest {
@@ -174,5 +175,6 @@ class ShoeInventoryTest {
                 "Current Value: 1900.0";
         assertEquals(shoeInventory1.getInfo(shoe1), shoe1Check);
     }
+
 
 }

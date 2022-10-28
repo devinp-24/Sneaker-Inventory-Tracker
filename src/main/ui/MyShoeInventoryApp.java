@@ -2,29 +2,34 @@ package ui;
 
 import model.Shoe;
 import model.ShoeInventory;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // ShoeInventory application
 public class MyShoeInventoryApp {
 
+    private static final String JSON_STORE = "./data/shoeInventory.json";
     private ShoeInventory myShoeCollection;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the ShoeInventory application
-    public MyShoeInventoryApp() {
+    public MyShoeInventoryApp() throws FileNotFoundException {
         runMyShoeInventoryApp();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void runMyShoeInventoryApp() {
         init();
-
         boolean keepGoing = true;
-
         while (keepGoing) {
-
             displayMenu();
             int userInput = input.nextInt();
             if (userInput == 1) {
@@ -42,6 +47,10 @@ public class MyShoeInventoryApp {
             } else if (userInput == 7) {
                 getInfoAboutShoe();
             } else if (userInput == 8) {
+                saveShoeCollection();
+            } else if (userInput == 9) {
+                loadShoeCollection();
+            } else if (userInput == 10) {
                 keepGoing = false;
             }
         }
@@ -52,6 +61,8 @@ public class MyShoeInventoryApp {
     private void init() {
         myShoeCollection = new ShoeInventory();
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays the menu of options to the user
@@ -65,7 +76,9 @@ public class MyShoeInventoryApp {
         System.out.println("5. View your wishlist");
         System.out.println("6. Add a shoe to your wishlist");
         System.out.println("7. Get information about a shoe from your collection");
-        System.out.println("8. Quit");
+        System.out.println("8. Save your shoe collection");
+        System.out.println("9. Load your shoe collection");
+        System.out.println("10. Quit");
 
     }
 
@@ -192,6 +205,32 @@ public class MyShoeInventoryApp {
             System.out.println("Shoe not in your collection");
         }
         backToMenu();
+    }
+
+    // EFFECTS: saves the shoeInventory to a file
+    private void saveShoeCollection() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myShoeCollection);
+            jsonWriter.close();
+            System.out.println("Saved My Shoe Collection to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        } finally {
+            backToMenu();
+        }
+    }
+
+    // EFFECTS: loads shoeInventory from file
+    private void loadShoeCollection() {
+        try {
+            myShoeCollection = jsonReader.read();
+            System.out.println("Loaded My Shoe Collection from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        } finally {
+            backToMenu();
+        }
     }
 
     // EFFECTS: helper method to create a new shoe

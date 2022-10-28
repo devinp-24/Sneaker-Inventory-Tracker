@@ -1,0 +1,32 @@
+{
+    "totalValue": 3100,
+    "numShoesSold": 2,
+    "wishlist": [{
+        "name": "Human Race Holi",
+        "personalCollection": false,
+        "type": "Low",
+        "brand": "Adidas",
+        "retailPrice": 170,
+        "value": 600
+    }],
+    "name": "My Shoe Collection",
+    "shoes": [
+        {
+            "name": "Jordan 1 Travis Scott",
+            "personalCollection": true,
+            "type": "High",
+            "brand": "Jordan",
+            "retailPrice": 150,
+            "value": 1900
+        },
+        {
+            "name": "SB Dunk Strange Love",
+            "personalCollection": true,
+            "type": "Low",
+            "brand": "Nike",
+            "retailPrice": 100,
+            "value": 1200
+        }
+    ],
+    "numShoes": 2
+}

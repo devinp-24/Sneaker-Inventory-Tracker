@@ -32,8 +32,7 @@ my collection
 about the shoe such as name of model, type, retail price
 and current value
 - As a user, I want to be given an option to save my
-shoe collection and I am prompted to do so when I
-am quitting the application
+shoe collection in a file for later use
 - As a user, I want to be able to be able to load my
 shoe collection from a file
 

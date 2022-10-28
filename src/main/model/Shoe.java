@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an individual shoe created by the user
-public class Shoe {
+public class Shoe implements Writable {
 
     // attributes
     private String name;
@@ -91,5 +94,17 @@ public class Shoe {
     // EFFECTS: sets whether the user wants to keep the shoe or sell it
     public void setPersonalCollection(boolean personalCollection) {
         this.personalCollection = personalCollection;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("brand", brand);
+        json.put("type", type);
+        json.put("retailPrice", retailPrice);
+        json.put("value", value);
+        json.put("personalCollection", personalCollection);
+        return json;
     }
 }

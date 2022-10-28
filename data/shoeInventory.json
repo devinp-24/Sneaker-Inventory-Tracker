@@ -1,0 +1,32 @@
+{
+    "totalValue": 2700,
+    "numShoesSold": 1,
+    "wishlist": [{
+        "name": "Jordan 1 Spiderman",
+        "personalCollection": true,
+        "type": "High",
+        "brand": "Jordan",
+        "retailPrice": 180,
+        "value": 3000
+    }],
+    "name": "My Shoe Collection",
+    "shoes": [
+        {
+            "name": "Jordan 1 Travis Scott",
+            "personalCollection": true,
+            "type": "Low",
+            "brand": "Jordan",
+            "retailPrice": 150,
+            "value": 1900
+        },
+        {
+            "name": "Speed 2.0",
+            "personalCollection": true,
+            "type": "High",
+            "brand": "Balenciaga",
+            "retailPrice": 900,
+            "value": 800
+        }
+    ],
+    "numShoes": 2
+}

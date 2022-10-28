@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents the user's shoe collection with a list of all their shoes
-public class ShoeInventory {
+public class ShoeInventory implements Writable {
 
     //attributes
     private List<Shoe> shoes;
@@ -119,5 +123,37 @@ public class ShoeInventory {
     // EFFECTS: returns the list of shoes in the user's wishlist
     public List<Shoe> getWishlist() {
         return wishlist;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", "My Shoe Collection");
+        json.put("shoes", shoesToJson());
+        json.put("numShoes", numShoes);
+        json.put("totalValue", totalValue);
+        json.put("numShoesSold", numShoesSold);
+        json.put("wishlist", wishlistToJson());
+        return json;
+    }
+
+    // EFFECTS: returns shoes in this shoe collection as a JSON array
+    private JSONArray shoesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Shoe shoe: shoes) {
+            jsonArray.put(shoe.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns shoes in the wishlist in this shoe collection as a JSON array
+    private JSONArray wishlistToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Shoe shoe: wishlist) {
+            jsonArray.put(shoe.toJson());
+        }
+        return jsonArray;
     }
 }
