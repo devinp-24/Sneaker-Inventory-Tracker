@@ -31,6 +31,11 @@ my collection
 - As a user, I want to be able to get some information
 about the shoe such as name of model, type, retail price
 and current value
+- As a user, I want to be given an option to save my
+shoe collection and I am prompted to do so when I
+am quitting the application
+- As a user, I want to be able to be able to load my
+shoe collection from a file
 
 An example of text with **bold** and *italic* fonts. 
 
