@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+// I have modelled my code on the sample application provided. I am citing this source in the following comment:
+// https://github.students.cs.ubc.ca/CPSC210
+
 // Represents a reader that reads shoeInventory from JSON data stored in a file
 public class JsonReader {
 
