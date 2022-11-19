@@ -22,7 +22,7 @@ public class MenuPage {
     private JButton sellShoeButton;
     private JButton viewWishlistButton;
     private JButton addWishlistShoeButton;
-    private JButton getShoeInfoButton;
+    private JButton keepShoeButton;
     private JButton saveCollectionButton;
     private JButton exit;
     private JPanel personalCollectionPanel;
@@ -31,14 +31,18 @@ public class MenuPage {
     private JPanel sellShoePanel;
     private JPanel viewWishlistPanel;
     private JPanel addWishlistPanel;
+    private JPanel keepShoePanel;
     private static final String JSON_STORE = "./data/shoeInventory.json";
     private ShoeInventory myShoeCollection;
     private JsonWriter jsonWriter;
 
+    // EFFECTS: creates and runs the Menu Page of the Application
     public MenuPage() {
         createAndShowGUI();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the menu JFrame
     private void createAndShowGUI() {
         init();
         // creating the Welcome Page window JFrame and setting it up
@@ -54,11 +58,15 @@ public class MenuPage {
 
     }
 
+    // MODIFIES: myShoeCollection, jsonWriter
+    // EFFECTS: sets myShoeCollection equal to Shoe Inventory in Welcome Page and sets jsonWriter
     private void init() {
         myShoeCollection = WelcomePage.shoeCollection;
         jsonWriter = new JsonWriter(JSON_STORE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: gets the content pane of the menu page jframe and adds the menu pane and function pane
     private void formattingPage() {
         container = menuPage.getContentPane();
         container.setLayout(null);
@@ -67,6 +75,8 @@ public class MenuPage {
         addFunctionPane();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the menu pane
     private void addMenuPane() {
         menuPane = new JPanel();
         menuPane.setBounds(0,0,350, container.getHeight());
@@ -79,6 +89,8 @@ public class MenuPage {
         addButtons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the function pane
     private void addFunctionPane() {
         functionPane = new JPanel();
         functionPane.setBounds(350,0,850,container.getHeight());
@@ -88,6 +100,8 @@ public class MenuPage {
         container.add(functionPane);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the buttons to the menu pane
     private void addButtons() {
         getStatsButton = new JButton("     View Personal Collection");
         addShoeButton = new JButton("     Add Shoe");
@@ -95,7 +109,7 @@ public class MenuPage {
         sellShoeButton = new JButton("     Sell Shoe");
         viewWishlistButton = new JButton("     View Wishlist");
         addWishlistShoeButton = new JButton("     Add Shoe To Wishlist");
-        getShoeInfoButton = new JButton("     Get Shoe Info");
+        keepShoeButton = new JButton("     Shoes I Keep Collection");
         saveCollectionButton = new JButton("     Save Collection");
         exit = new JButton("     Exit");
         getStatsButton.setBounds(0,150,350,50);
@@ -104,13 +118,15 @@ public class MenuPage {
         sellShoeButton.setBounds(0,300,350,50);
         viewWishlistButton.setBounds(0,350,350,50);
         addWishlistShoeButton.setBounds(0,400,350,50);
-//        getShoeInfoButton.setBounds(0,450,350,50);
-        saveCollectionButton.setBounds(0,450,350,50);
-        exit.setBounds(0,500,350,50);
+        keepShoeButton.setBounds(0,450,350,50);
+        saveCollectionButton.setBounds(0,500,350,50);
+        exit.setBounds(0,550,350,50);
 
         buttonFormatter();
     }
 
+    // MODIFIES: this
+    // EFFECTS: calls the button formatting method and sets the button on-click functions
     private void buttonFormatter() {
         formatButtons(getStatsButton);
         formatButtons(addShoeButton);
@@ -118,7 +134,7 @@ public class MenuPage {
         formatButtons(sellShoeButton);
         formatButtons(viewWishlistButton);
         formatButtons(addWishlistShoeButton);
-        formatButtons(getShoeInfoButton);
+        formatButtons(keepShoeButton);
         formatButtons(saveCollectionButton);
         formatButtons(exit);
         viewButtonFunction();
@@ -127,11 +143,13 @@ public class MenuPage {
         sellShoeButtonFunction();
         viewWishlistButtonFunction();
         addWishlistShoeButtonFunction();
-//        getInfoButtonFunction();
+        keepShoeButtonFunction();
         saveButtonFunction();
         exitButtonFunction();
     }
 
+    // MODIFIES: this
+    // EFFECTS: formats the buttons
     private void formatButtons(JButton button) {
         button.setOpaque(true);
         button.setContentAreaFilled(false);
@@ -155,6 +173,8 @@ public class MenuPage {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds image to the menu pane
     private void addImage() {
         JLabel shoeImage = new JLabel();
         shoeImage.setIcon(new ImageIcon("./images/MenuShoes.png"));
@@ -165,6 +185,8 @@ public class MenuPage {
         menuPane.add(shoeImage);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the personal collection layout
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void personalCollectionLayout() {
         functionPane.removeAll();
@@ -196,6 +218,8 @@ public class MenuPage {
         personalCollectionPanel.add(totalValue);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the add shoe layout
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addShoeLayout() {
         functionPane.removeAll();
@@ -299,6 +323,8 @@ public class MenuPage {
         addShoePanel.add(submit);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the remove shoe layout
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void removeShoeLayout() {
         functionPane.removeAll();
@@ -358,6 +384,8 @@ public class MenuPage {
         removeShoePanel.add(submit);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the sell shoe layout
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void sellShoeLayout() {
         functionPane.removeAll();
@@ -417,6 +445,8 @@ public class MenuPage {
         sellShoePanel.add(submit);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the view wishlist layout
     private void viewWishlistLayout() {
         functionPane.removeAll();
         viewWishlistPanel = new JPanel();
@@ -437,6 +467,8 @@ public class MenuPage {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the add shoe to wishlist layout
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addWishlistLayout() {
         functionPane.removeAll();
@@ -540,93 +572,33 @@ public class MenuPage {
         addWishlistPanel.add(submit);
     }
 
-//    private void getInfoLayout() {
-//        functionPane.removeAll();
-//        getInfoPanel = new JPanel();
-//        functionPane.add(getInfoPanel);
-//        getInfoPanel.setLayout(null);
-//        getInfoPanel.setBounds(0,0,functionPane.getWidth(), functionPane.getHeight());
-//        getInfoPanel.setBackground(Color.WHITE);
-//        JLabel introLabel = new JLabel("My current personal collection is: ");
-//        DefaultListModel<String> shoeNames = new DefaultListModel<>();
-//        for (Shoe shoe: myShoeCollection.getShoes()) {
-//            shoeNames.addElement(shoe.getName());
-//        }
-//        JList<String> shoesNames = new JList<>(shoeNames);
-//        JLabel removeShoeLabel = new JLabel("Enter name of shoe to get info: ");
-//        JTextField shoeName = new JTextField();
-//        JButton submit = new JButton("Get Info");
-//        introLabel.setBounds(20,50,functionPane.getWidth(), introLabel.getPreferredSize().height);
-//        shoesNames.setBounds(20, 100, functionPane.getWidth(), shoesNames.getPreferredSize().height);
-//        removeShoeLabel.setBounds(20, 400, 200, 40);
-//        shoeName.setBounds(300,400,200,40);
-//        submit.setBounds(550,450,230,50);
-//        shoeName.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//        submit.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//        submit.setOpaque(true);
-//        submit.setContentAreaFilled(false);
-//        submit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//        submit.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseEntered(java.awt.event.MouseEvent evt) {
-//                submit.setContentAreaFilled(true);
-//                submit.setBackground(new Color(0X2083DC));
-//                submit.setForeground(Color.WHITE);
-//            }
-//
-//            public void mouseExited(java.awt.event.MouseEvent evt) {
-//                submit.setContentAreaFilled(false);
-//                submit.setForeground(Color.BLACK);
-//                submit.setBackground(UIManager.getColor("control"));
-//            }
-//        });
-//        submit.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                for (Shoe shoe: myShoeCollection.getShoes()) {
-//                    if (shoe.getName().equals(shoeName.getText())) {
-//                        JLabel modelNameLabel = new JLabel("Model Name: ");
-//                        JLabel brandNameLabel = new JLabel("Brand: ");
-//                        JLabel shoeTypeLabel = new JLabel("Type: ");
-//                        JLabel retailPriceLabel = new JLabel("Retail Price: ");
-//                        JLabel currentPriceLabel = new JLabel("Current Price: ");
-//                        JLabel modelName = new JLabel(shoe.getName());
-//                        JLabel brandName = new JLabel(shoe.getBrand());
-//                        JLabel shoeType = new JLabel(shoe.getType());
-//                        JLabel retailPrice = new JLabel(String.valueOf(shoe.getRetailPrice()));
-//                        JLabel currentPrice = new JLabel(String.valueOf(shoe.getValue()));
-//                        modelNameLabel.setBounds(20,500,200,40);
-//                        modelName.setBounds(300,500,200,40);
-//                        brandNameLabel.setBounds(20,550,200,40);
-//                        brandName.setBounds(300,550,200,40);
-//                        shoeTypeLabel.setBounds(20,600,200,40);
-//                        shoeType.setBounds(300,600,200,40);
-//                        retailPriceLabel.setBounds(650,200,200,40);
-//                        retailPrice.setBounds(300,650,200,40);
-//                        currentPriceLabel.setBounds(700,250,200,40);
-//                        currentPrice.setBounds(300,700,200,40);
-//                        getInfoPanel.add(modelNameLabel);
-//                        getInfoPanel.add(modelName);
-//                        getInfoPanel.add(brandNameLabel);
-//                        getInfoPanel.add(brandName);
-//                        getInfoPanel.add(shoeTypeLabel);
-//                        getInfoPanel.add(shoeType);
-//                        getInfoPanel.add(retailPriceLabel);
-//                        getInfoPanel.add(retailPrice);
-//                        getInfoPanel.add(currentPriceLabel);
-//                        getInfoPanel.add(currentPrice);
-//                    }
-//                }
-//            }
-//        });
-//        getInfoPanel.add(introLabel);
-//        getInfoPanel.add(shoesNames);
-//        getInfoPanel.add(removeShoeLabel);
-//        getInfoPanel.add(shoeName);
-//        getInfoPanel.add(submit);
-//    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the keep shoe layout
+    private void keepShoeLayout() {
+        functionPane.removeAll();
+        keepShoePanel = new JPanel();
+        functionPane.add(keepShoePanel);
+        keepShoePanel.setLayout(null);
+        keepShoePanel.setBounds(0,0,functionPane.getWidth(), functionPane.getHeight());
+        keepShoePanel.setBackground(Color.WHITE);
+        JLabel introLabel = new JLabel("Shoes I am keeping in collection and not willing to sell: ");
+        DefaultListModel<String> shoeNames = new DefaultListModel<>();
+        for (Shoe shoe: myShoeCollection.getShoes()) {
+            if (shoe.getPersonalCollection()) {
+                shoeNames.addElement(shoe.getName());
+            }
+        }
+        JList<String> shoesNames = new JList<>(shoeNames);
+        introLabel.setBounds(20,50,functionPane.getWidth(), introLabel.getPreferredSize().height);
+        shoesNames.setBounds(20, 100, functionPane.getWidth(), shoesNames.getPreferredSize().height);
+        keepShoePanel.add(introLabel);
+        keepShoePanel.add(shoesNames);
+    }
 
 
+    // MODIFIES: viewButton
+    // EFFECTS: sets the viewButton function
     public void viewButtonFunction() {
         getStatsButton.addActionListener(new ActionListener() {
 
@@ -637,6 +609,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: addShoeButton
+    // EFFECTS: sets the addShoeButton function
     public void addShoeButtonFunction() {
         addShoeButton.addActionListener(new ActionListener() {
 
@@ -647,6 +621,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: removeShoeButton
+    // EFFECTS: sets the removeShoeButton function
     public void removeShoeButtonFunction() {
         removeShoeButton.addActionListener(new ActionListener() {
 
@@ -657,6 +633,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: sellShoeButton
+    // EFFECTS: sets the sellShoeButton function
     public void sellShoeButtonFunction() {
         sellShoeButton.addActionListener(new ActionListener() {
 
@@ -667,6 +645,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: viewWishlistButton
+    // EFFECTS: sets the viewWishlistButton function
     public void viewWishlistButtonFunction() {
         viewWishlistButton.addActionListener(new ActionListener() {
 
@@ -677,6 +657,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: addWishlistShoeButton
+    // EFFECTS: sets the addWishlistShoeButton function
     public void addWishlistShoeButtonFunction() {
         addWishlistShoeButton.addActionListener(new ActionListener() {
 
@@ -687,16 +669,20 @@ public class MenuPage {
         });
     }
 
-//    public void getInfoButtonFunction() {
-//        getShoeInfoButton.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                getInfoLayout();
-//            }
-//        });
-//    }
+    // MODIFIES: keepShoeButton
+    // EFFECTS: sets the keepShoeButton function
+    public void keepShoeButtonFunction() {
+        keepShoeButton.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                keepShoeLayout();
+            }
+        });
+    }
+
+    // MODIFIES: saveButton
+    // EFFECTS: sets the saveButton function
     public void saveButtonFunction() {
         saveCollectionButton.addActionListener(new ActionListener() {
 
@@ -717,6 +703,8 @@ public class MenuPage {
         });
     }
 
+    // MODIFIES: exitButton
+    // EFFECTS: sets the exitButton function
     public void exitButtonFunction() {
         exit.addActionListener(new ActionListener() {
 

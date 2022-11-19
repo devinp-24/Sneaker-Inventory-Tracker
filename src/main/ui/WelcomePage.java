@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 
@@ -22,10 +21,13 @@ public class WelcomePage extends JFrame {
     private JsonReader jsonReader;
     protected static ShoeInventory shoeCollection;
 
+    // EFFECTS: creates and runs the Welcome Page of the Application
     public WelcomePage() {
         createAndShowGUI();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the welcome page jframe
     private void createAndShowGUI() {
         // creating the Welcome Page window JFrame and setting it up
         startWindow = new JFrame("My Shoe Collection");
@@ -40,7 +42,8 @@ public class WelcomePage extends JFrame {
 
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: gets the content pane and starts formatting
     public void formattingPage() {
         startWindow.getContentPane().setBackground(new Color(0XFFFDD0));
         container = startWindow.getContentPane();
@@ -50,6 +53,8 @@ public class WelcomePage extends JFrame {
         addButtons();
     }
 
+    // MODIFIES: this
+    // EFFETCS: formats the welcome title and image
     public void formatWelcomeLabel() {
         JLabel shoesWelcomeLabel = new JLabel();
         shoesWelcomeLabel.setBounds(350,60,600,400);
@@ -62,6 +67,8 @@ public class WelcomePage extends JFrame {
         container.add(shoesWelcomeLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the welcome page buttons
     public void addButtons() {
         create = new JButton("Create A New Collection");
         load = new JButton("Load My Shoe Collection");
@@ -83,6 +90,8 @@ public class WelcomePage extends JFrame {
         container.add(exit);
     }
 
+    // MODIFIES: this
+    // EFFECTS: formats the buttons
     public void formatButtons(JButton button) {
         button.setOpaque(true);
         button.setContentAreaFilled(false);
@@ -90,6 +99,8 @@ public class WelcomePage extends JFrame {
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the hover effects to the buttons
     public void buttonHoverEffect(JButton button) {
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -107,6 +118,8 @@ public class WelcomePage extends JFrame {
 
     }
 
+    // MODIFIES: createButton
+    // EFFECTS: creates the createButton function
     public void createButtonFunction() {
         create.addActionListener(new ActionListener() {
 
@@ -120,6 +133,8 @@ public class WelcomePage extends JFrame {
         });
     }
 
+    // MODIFIES: loadButton
+    // EFFECTS: creates the loadButton function
     public void loadButtonFunction() {
         load.addActionListener(new ActionListener() {
 
@@ -140,6 +155,8 @@ public class WelcomePage extends JFrame {
         });
     }
 
+    // MODIFIES: exitButton
+    // EFFECTS: creates the exitButton function
     public void exitButtonFunction() {
         exit.addActionListener(new ActionListener() {
 
@@ -149,17 +166,5 @@ public class WelcomePage extends JFrame {
             }
         });
     }
-
-
-
-
-//    public static void main(String[] args) {
-//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new WelcomePage();
-//            }
-//        });
-//    }
 
 }
