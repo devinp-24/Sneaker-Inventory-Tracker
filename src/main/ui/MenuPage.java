@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Shoe;
 import model.ShoeInventory;
 import persistence.JsonWriter;
@@ -710,11 +712,16 @@ public class MenuPage {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                printLog(EventLog.getInstance());
                 System.exit(0);
             }
         });
     }
 
-
+    public void printLog(EventLog eventLog) {
+        for (Event event: eventLog) {
+            System.out.println(event.toString());
+        }
+    }
 
 }

@@ -36,6 +36,7 @@ public class ShoeInventory implements Writable {
         shoes.add(shoe);
         this.setNumShoes(this.numShoes + 1);
         this.setTotalValue(this.totalValue + shoe.getValue());
+        EventLog.getInstance().logEvent(new Event("'" + shoe.getName() + "' added to Shoe Collection"));
     }
 
     // MODIFIES: this
@@ -44,6 +45,7 @@ public class ShoeInventory implements Writable {
         shoes.remove(shoe);
         this.setNumShoes(this.numShoes - 1);
         this.setTotalValue(totalValue - shoe.getValue());
+        EventLog.getInstance().logEvent(new Event("'" + shoe.getName() + "' removed from Shoe Collection"));
     }
 
     // REQUIRES: shoe should not be labelled as part of personal collection to keep and shoe is in inventory
@@ -53,6 +55,7 @@ public class ShoeInventory implements Writable {
         if ((!shoe.getPersonalCollection()) && this.getShoes().contains(shoe)) {
             this.removeShoes(shoe);
             this.setNumShoesSold(numShoesSold + 1);
+            EventLog.getInstance().logEvent(new Event("'" + shoe.getName() + "' was sold"));
             return true;
         } else {
             return false;
@@ -65,6 +68,7 @@ public class ShoeInventory implements Writable {
     public boolean addToWishlist(Shoe shoe) {
         if (!this.getShoes().contains(shoe) && !this.getWishlist().contains(shoe)) {
             this.wishlist.add(shoe);
+            EventLog.getInstance().logEvent(new Event("'" + shoe.getName() + "' added to Wishlist"));
             return true;
         } else {
             return false;

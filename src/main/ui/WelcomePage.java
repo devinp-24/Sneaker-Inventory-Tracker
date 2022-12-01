@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ShoeInventory;
 import persistence.JsonReader;
 
@@ -162,9 +164,16 @@ public class WelcomePage extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                printLog(EventLog.getInstance());
                 System.exit(0);
             }
         });
+    }
+
+    public void printLog(EventLog eventLog) {
+        for (Event event: eventLog) {
+            System.out.println(event.toString());
+        }
     }
 
 }

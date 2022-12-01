@@ -78,3 +78,36 @@ page. A pop-up message indicates when collection is saved
 - You can reload the state of my application by clicking on
 the 'Load My Shoe Collection' button in the welcome page.
 A pop-up message shows if data is loaded successfully.
+
+### Phase 4: Task 2
+
+Sample 
+
+Thu Dec 01 13:19:14 PST 2022\
+'Jordan 1 Travis' added to Shoe Collection\
+Thu Dec 01 13:19:14 PST 2022\
+'Yeezy 700V3' added to Shoe Collection\
+Thu Dec 01 13:19:14 PST 2022\
+'Triple S' added to Shoe Collection\
+Thu Dec 01 13:19:14 PST 2022\
+'B23' added to Shoe Collection\
+Thu Dec 01 13:19:14 PST 2022\
+'Dunk Panda' added to Shoe Collection\
+Thu Dec 01 13:20:10 PST 2022\
+'Jordan 1 Shattered Backboard' added to Shoe Collection\
+Thu Dec 01 13:20:24 PST 2022\
+'Dunk Panda' removed from Shoe Collection\
+Thu Dec 01 13:20:32 PST 2022\
+'B23' removed from Shoe Collection\
+Thu Dec 01 13:20:32 PST 2022\
+'B23' was sold\
+Thu Dec 01 13:20:59 PST 2022\
+'Jordan 1 Spider-man Origin' added to Wishlist
+
+Note: This is a sample representation of the log events
+printed on console after the application is closed. Events
+that are logged are: when a shoe is added to the collection, 
+when a shoe is removed from the collection, when a shoe is 
+sold, when a shoe is added to the wishlist. When a shoe 
+is sold, two events occur: the shoe is first removed from 
+the collection and then sold. 

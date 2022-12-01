@@ -1,5 +1,5 @@
 {
-    "totalValue": 5300,
+    "totalValue": 5800,
     "numShoesSold": 1,
     "wishlist": [],
     "name": "My Shoe Collection",
@@ -35,7 +35,15 @@
             "brand": "Dior",
             "retailPrice": 800,
             "value": 1000
+        },
+        {
+            "name": "Dunk Panda",
+            "personalCollection": true,
+            "type": "Low",
+            "brand": "Nike",
+            "retailPrice": 100,
+            "value": 500
         }
     ],
-    "numShoes": 4
+    "numShoes": 5
 }
