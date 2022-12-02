@@ -33,7 +33,13 @@ public class WelcomePage extends JFrame {
     private void createAndShowGUI() {
         // creating the Welcome Page window JFrame and setting it up
         startWindow = new JFrame("My Shoe Collection");
-        startWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startWindow.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
         startWindow.setSize(1200,840);
 
         // Display the window
@@ -174,6 +180,11 @@ public class WelcomePage extends JFrame {
         for (Event event: eventLog) {
             System.out.println(event.toString());
         }
+    }
+
+    public void closeOperation() {
+        printLog(EventLog.getInstance());
+        System.exit(0);
     }
 
 }

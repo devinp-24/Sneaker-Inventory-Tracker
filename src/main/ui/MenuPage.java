@@ -49,7 +49,13 @@ public class MenuPage {
         init();
         // creating the Welcome Page window JFrame and setting it up
         menuPage = new JFrame("My Shoe Collection");
-        menuPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuPage.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
         menuPage.setSize(1200,840);
 
         // Display the window

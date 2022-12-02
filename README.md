@@ -110,4 +110,55 @@ that are logged are: when a shoe is added to the collection,
 when a shoe is removed from the collection, when a shoe is 
 sold, when a shoe is added to the wishlist. When a shoe 
 is sold, two events occur: the shoe is first removed from 
-the collection and then sold. 
+the collection and then sold.
+
+### Phase 4: Task 3
+
+My UML diagram in the root folder represents the 
+UML class diagram of the entire project except
+the test classes. I have used solid line arrows
+for direct associations and have included the
+multiplicities. To briefly summarize my diagram:
+
+- EventLog class has a collection of events so
+direct association with 0..n multiplicity
+- ShoeInventory and Shoe classes implement the
+Writable interface
+- ShoeInventory has a collection of shoes therefore
+direct association with 0..n multiplicity
+- ShoeInventory uses an EventLog instance therefore
+aggregation relationship
+- JsonReader and JsonWriter both use the ShoeInventory
+class for saving and loading therefore direct association
+- JsonReader and JsonWriter both use the Shoe
+class for saving and loading therefore direct association
+- WelcomePage class uses one JsonReader object and one
+ShoeInventory object therefore has direct relationship with
+both with a multiplicity of 1
+- WelcomePage class uses one JsonWriter object and one
+ShoeInventory object therefore has direct relationship with
+both with a multiplicity of 1
+- WelcomePage also calls the MenuPage to open it therefore
+direct association
+- MyShoeInventoryApp (old class to run the console app) 
+creates one JsonWriter object, one JsonReader object, one
+ShoeInventory object and therefore has direct association
+with all with multiplicity of 1
+- The MainGUI creates new WelcomePage so direct association
+- The Main class creates new MyShoeInventoryApp therefore
+direct association with 1 multiplicity
+
+Finally, in my opinion, the project was a great way
+of learning how to organize my code. If I did have more
+time to complete my project, however, the first thing 
+I would change is my GUI class. Most of my methods
+are very long and contain the entire formatting.
+If I had time I would organize the code better into 
+more methods and classes to make the code more 
+comprehensible. Moreover, I would have added more
+features like images for shoes and an entire database
+of the common shoes so users could select shoes
+to add with pre-filled information instead of having
+to type in the information themselves. I also would
+have worked on my GUI more and made the application
+easier to navigate and use for the user.
